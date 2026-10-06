@@ -1,0 +1,27 @@
+class Solution:
+    def checkInclusion(self, s1: str, s2: str) -> bool:
+
+        # sliding window on right string  
+        # for each right, check it it exists in left
+        # if it exists store it in array
+        # check if string 1 exists in arrays contents
+        alph1 = [0]*26
+        alph2 = [0]*26
+        
+        for c in s1:
+            alph1[ord(c)-ord('a')]+=1
+
+        l = 0 
+        r = 0 
+
+        while r<len(s2):
+            alph2[ord(s2[r]) - ord('a')] += 1
+
+            if r-l+1 > len(s1):
+                alph2[ord(s2[l]) - ord('a')] -=1
+                l+=1 
+            r+=1
+            if alph1 == alph2:
+                return True
+        return False
+
